@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caio Spoladore — Product Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="hero__center-line" aria-hidden="true"></div>
+  <div class="hero__title-h-line" aria-hidden="true"></div>
+  <div class="about__center-line" aria-hidden="true"></div>
+  <div class="about__title-h-line" aria-hidden="true"></div>
+  <header class="site-header">
+    <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark theme">
+      <span class="theme-toggle-icon sun" aria-hidden="true">☀</span>
+      <span class="theme-toggle-icon moon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <path fill="currentColor" fill-rule="evenodd" d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162z" clip-rule="evenodd" />
+        </svg>
+      </span>
+    </button>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="hero__backgrounds" aria-hidden="true">
+        <!-- Figma: Rectangle 22 (behind) + Rectangle 23 (on top) — exported as bg-hero-1 / bg-hero-2 -->
+        <img src="assets/images/bg-hero-1.svg" alt="" class="hero__bg hero__bg--1" width="253" height="561">
+        <img src="assets/images/bg-hero-2.svg" alt="" class="hero__bg hero__bg--2" width="202" height="684">
+      </div>
+      <div class="hero__layout">
+          <div class="hero__frame-inner">
+            <img src="assets/images/hero-portrait.png" alt="Caio Spoladore" class="hero__portrait" width="400" height="528">
+          </div>
+        <div class="hero__content">
+          <div class="hero__headline">
+            <span class="hero__tag">Product Designer</span>
+            <h1 class="hero__title">Caio<br>Spoladore</h1>
+          </div>
+          <p class="hero__bio">Hello, I'm Caio and my job is to solve problems with the best possible solution, creating digital products focused on the user.</p>
+        </div>
+        <a href="#portfolio" class="hero__scroll" aria-label="Scroll to portfolio">
+          <img src="assets/icons/mouse.svg" alt="" width="70" height="70" aria-hidden="true">
+        </a>
+      </div>
+    </section>
+
+    <section class="portfolio" id="portfolio">
+      <div class="portfolio__inner">
+        <div class="portfolio__grid">
+        <article class="card">
+          <div class="card__image-wrap">
+            <img src="assets/images/img-04.png" alt="Quartile Platform" class="card__image" loading="lazy">
+          </div>
+          <h3 class="card__title">Quartile Platform - Intelligent Advertising</h3>
+          <p class="card__desc">Design System and a total new platform for the Quartile company to manage ads.</p>
+        </article>
+        <article class="card">
+          <div class="card__image-wrap">
+            <img src="assets/images/img-06.png" alt="New Omni" class="card__image" loading="lazy">
+          </div>
+          <h3 class="card__title">New Omni - Omnichannel Management</h3>
+          <p class="card__desc">A omnichannel tool with a clean interface to manage the support to all kind of services.</p>
+        </article>
+        <article class="card">
+          <div class="card__image-wrap">
+            <img src="assets/images/img-05.png" alt="Instation" class="card__image" loading="lazy">
+          </div>
+          <h3 class="card__title">Instation - Virtual Office for MS Teams</h3>
+          <p class="card__desc">An app for the MS Teams with rooms for the company squads with insights and metrics</p>
+        </article>
+        <article class="card">
+          <div class="card__image-wrap">
+            <img src="assets/images/img-02.png" alt="UX Process" class="card__image" loading="lazy">
+          </div>
+          <h3 class="card__title">UX Process</h3>
+          <p class="card__desc">A clear path from insight to interaction, shaping intuitive and impactful journeys.</p>
+        </article>
+        <article class="card">
+          <div class="card__image-wrap">
+            <img src="assets/images/img-03.png" alt="Delivery Model Track" class="card__image" loading="lazy">
+          </div>
+          <h3 class="card__title">Delivery Model Track</h3>
+          <p class="card__desc">A tool that focuses on the mental health of employees and their learning within the company.</p>
+        </article>
+        <article class="card">
+          <div class="card__image-wrap">
+            <img src="assets/images/img-01.png" alt="Discount Hunting" class="card__image" loading="lazy">
+          </div>
+          <h3 class="card__title">Discount Hunting</h3>
+          <p class="card__desc">This app was designed to offer users discounts and help them find the best and closest deals.</p>
+        </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="process" id="process">
+      <div class="process__backdrop" aria-hidden="true"></div>
+      <div class="process__inner">
+        <h2 class="process__title">Lean Process</h2>
+        <p class="process__intro">One Lean process is always adaptable, allowing us to adjust based on <br> the timeframe and specific requirements of each product or feature.</p>
+        <div class="process__diagram">
+          <img src="assets/images/process-loop.png" alt="Lean process loop: Problem Definition, Assumptions & Hypotheses, Ideation, Build, Feedback, Iterate & Refine" class="process__loop" width="1200" height="400">
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="about__inner">
+        <div class="about__content">
+          <h2 class="about__title">About me</h2>
+          <div class="about__text">
+            <p>Graduated in Design (UX/UI), and postgraduate in Project Management and experience in Front-end Development.</p>
+            <p>I have more then 15 years of experience working with user interface, manage to work with some of the greatest brands in Brazil and on some big companies within the United States.</p>
+            <p>This Page is a work in progress as you can see, thanks for passing by.</p>
+            <p><strong>Caio Spoladore</strong><br>Product Designer | Design Engineer | Team Leader</p>
+          </div>
+          <div class="about__card">
+            <img src="assets/images/linkedin.png" alt="" class="about__card-img" width="440" height="213">
+            <a href="https://www.linkedin.com/in/caiospoladore/" class="about__card-link" target="_blank" rel="noopener noreferrer" aria-label="Open LinkedIn profile">
+              <img src="assets/icons/open-in-new.svg" alt="" width="24" height="24">
+            </a>
+          </div>
+          <div class="about__contact">
+            <a href="tel:+5514991163589" class="about__contact-item">
+              <img src="assets/icons/battery_android_frame_6.svg" alt="" width="24" height="24">
+              <span>+55 14 991163589</span>
+            </a>
+            <a href="mailto:caio.spoladore@gmail.com" class="about__contact-item">
+              <img src="assets/icons/drafts.svg" alt="" width="24" height="24">
+              <span>caio.spoladore@gmail.com</span>
+            </a>
+          </div>
+        </div>
+        <div class="cta">
+          <div class="cta__box">
+            <div class="boxbox"></div>
+            <h2 class="cta__title">Let's<br>Build<br>Together</h2>
+            <img src="assets/icons/mouse-pointer.svg" alt="" class="cta__cursor" width="60" height="60" aria-hidden="true">
+          </div>
+          <ul class="cta__skills">
+            <li>
+              <span class="cta__skills-line">Design System</span>
+              <span class="cta__skills-line">Research</span>
+            </li>
+            <li>
+              <span class="cta__skills-line">User interview</span>
+              <span class="cta__skills-line">Figma Prototype</span>
+            </li>
+            <li>
+              <span class="cta__skills-line">Code Handoff</span>
+              <span class="cta__skills-line">Storybook</span>
+            </li>
+            <li>
+              <span class="cta__skills-line">AI Orchestration</span>
+              <span class="cta__skills-line">Design Engineer</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
