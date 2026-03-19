@@ -1,0 +1,779 @@
+/* --- Theme: dark (default) --- */
+:root,
+[data-theme="dark"] {
+  --bg: #0e1014;
+  --bg-soft: #141621;
+  --text: #ffffff;
+  --text-muted: #a0aec0;
+  --accent: #0e93f5;
+  --accent-alt: #0071eb;
+  --border: #554787;
+  --card-bg: #1a1c24;
+  /* About footer decorative background */
+  --about-footer-bg: url("../assets/images/bg-footer.png");
+}
+
+/* --- Theme: light --- */
+[data-theme="light"] {
+  --bg: #f7fafc;
+  --bg-soft: #edf2f7;
+  --text: #1a202c;
+  --text-muted: #4a5568;
+  --accent: #0e93f5;
+  --accent-alt: #0066cc;
+  --border: #554787;
+  --card-bg: #ffffff;
+  /* Greyish UI ink for hero/CTA borders & skills (softer than pure black) */
+  --ink-grey: #6b7280;
+  /* Same file as dark; blend mode makes dark-theme artwork visible on pale --bg */
+  --about-footer-bg: url("../assets/images/bg-footer.png");
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--bg);
+  min-height: 100vh;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* --- Header & theme toggle --- */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem 1.5rem;
+  pointer-events: none;
+}
+
+.theme-toggle {
+  pointer-events: auto;
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border: 2px solid var(--border);
+  background: var(--bg-soft);
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.theme-toggle:hover {
+  background: var(--card-bg);
+}
+
+.theme-toggle-icon {
+  position: absolute;
+}
+
+.theme-toggle-icon svg {
+  display: block;
+}
+
+.theme-toggle .moon {
+  opacity: 1;
+  color: #FFF;
+}
+
+.theme-toggle .sun {
+  opacity: 0;
+  color: #000;
+}
+
+[data-theme="light"] .theme-toggle .moon {
+  opacity: 0;
+}
+
+[data-theme="light"] .theme-toggle .sun {
+  opacity: 1;
+}
+
+@keyframes hero-mouse-float {
+  0%,
+ 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* Slightly wider vertical travel for CTA cursor */
+@keyframes cta-cursor-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+/* --- Hero (full-bleed backgrounds + constrained content) --- */
+/* Hero vertical: viewport top → bottom of .hero__headline, x = left edge (JS) */
+.hero__center-line {
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: none;
+  width: 0;
+  height: 0;
+  border-left: 2px dashed #0071eb;
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* Hero horizontal: bottom-left of .hero__headline → viewport right (JS) */
+.hero__title-h-line {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border: none;
+  border-top: 2px dashed #0071eb;
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* About: same behavior, anchored to .cta__box top (JS) */
+.about__center-line {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 2px dashed #0071eb;
+  pointer-events: none;
+  z-index: 50;
+}
+
+.about__title-h-line {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border: none;
+  border-top: 2px dashed #0071eb;
+  pointer-events: none;
+  z-index: 50;
+}
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.hero__backgrounds {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero__bg {
+  position: absolute;
+  max-width: none;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: right top;
+}
+
+/* Layer 1 — Figma Rectangle 22 (behind); export is already canvas-oriented */
+.hero__bg--1 {
+  right: 0;
+  top: 5%;
+  width: 253px;
+  height: 561px;
+  z-index: 0;
+}
+
+/* Layer 2 — Figma Rectangle 23 (vertical strip, bleeds above hero) */
+.hero__bg--2 {
+  left:0;
+  top:30%;
+  width:202px;
+  max-height:684px;
+  object-fit: contain;
+  z-index: 1;
+}
+
+.hero__layout {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 6rem 1.5rem 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+.hero__frame {
+  border: 2px solid var(--border);
+  padding: 12px;
+  position: relative;
+}
+
+.hero__frame-inner {
+  border: 2px solid var(--border);
+  overflow: hidden;
+  width: min(400px, 90vw);
+  aspect-ratio: 400 / 528;
+}
+
+.hero__portrait {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero__content {
+  flex: 1;
+  min-width: 280px;
+  max-width: 560px;
+}
+
+.hero__headline {
+  display: inline-block;
+  width: fit-content;
+  max-width: 100%;
+  border: 2px solid #0071eb;
+  padding: 0;
+  padding-bottom: 7px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  margin-top: -2px;
+}
+
+.hero__tag {
+  display: inline-block;
+  background: var(--accent-alt);
+  color:#FFF;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 12px;
+  margin-bottom: 0.5rem;
+  margin-top: -2px;
+  line-height: 19px;
+}
+
+.hero__title {
+  font-size: clamp(3rem, 8vw, 100px);
+  font-weight: 600;
+  line-height: 1;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+.hero__bio {
+  font-size: 16px;
+  color: var(--text-muted);
+  margin: 0;
+  max-width: 512px;
+}
+
+.hero__scroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.8;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.hero__scroll:hover,
+.hero__scroll:focus-visible {
+  opacity: 1;
+}
+
+.hero__scroll:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.hero__scroll img {
+  width: 70px;
+  height: 70px;
+  pointer-events: none;
+  animation: hero-mouse-float 2.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__scroll img,
+  .cta__cursor {
+    animation: none;
+  }
+}
+
+/* --- Portfolio --- */
+.portfolio {
+  position: relative;
+  width: 100%;
+  max-width: none;
+  margin: 30px 0 0 0;
+  padding: 4rem 0;
+  scroll-margin-top: -10px;
+  background-color: var(--bg);
+  background-image: url("../assets/images/bg-section-projects.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  /* Full height of this section; centered horizontally */
+  background-size: 100% auto;
+  overflow-x: visible;
+}
+
+.portfolio__inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.portfolio__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  overflow: hidden;
+}
+
+.card__image-wrap {
+  aspect-ratio: 440 / 300;
+  background: var(--bg-soft);
+  overflow: hidden;
+}
+
+.card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card__title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  padding: 1rem 1rem 0;
+  line-height: 1.3;
+}
+
+.card__desc {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--text-muted);
+  margin: 0;
+  padding: 0.5rem 1rem 1.25rem;
+  line-height: 1.4;
+}
+
+/* --- Process --- */
+.process {
+  position: relative;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 4rem 0;
+}
+
+/* Full-bleed backdrop (edge to edge), content stays in .process__inner */
+.process__backdrop {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 0%, var(--bg-soft) 30%, var(--bg-soft) 70%, transparent 100%);
+}
+
+.process__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.process__title {
+  font-size: clamp(2.5rem, 6vw, 100px);
+  font-weight: 600;
+  margin: 0 0 1rem;
+}
+
+.process__intro {
+  font-size: 18px;
+  color: var(--text-muted);
+  max-width: 903px;
+  margin: 0 0 3rem;
+  line-height: 1.5;
+}
+
+.process__diagram {
+  position: relative;
+  margin: 2rem 0;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.process__loop {
+  width: 100%;
+  height: auto;
+}
+
+/* --- About + CTA --- */
+.about {
+  position: relative;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 4rem 0;
+  background-color: var(--bg);
+  /* Footer art lives on ::before so it always respects --about-footer-bg per theme */
+  isolation: isolate;
+}
+
+.about::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-color: transparent;
+  background-image: var(--about-footer-bg);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-size: min(70vw, 1100px) auto;
+}
+
+/* Light theme: no decorative section backgrounds */
+[data-theme="light"] .hero__backgrounds {
+  display: none;
+}
+
+[data-theme="light"] .portfolio {
+  background-image: none;
+}
+
+[data-theme="light"] .card {
+  border-color: var(--ink-grey);
+}
+
+[data-theme="light"] .process__backdrop {
+  display: none;
+}
+
+[data-theme="light"] .about::before {
+  display: none;
+}
+
+/* Light theme: hide dashed guide lines (hero + about) */
+[data-theme="light"] .hero__center-line,
+[data-theme="light"] .hero__title-h-line,
+[data-theme="light"] .about__center-line,
+[data-theme="light"] .about__title-h-line {
+  display: none;
+}
+
+/* Light theme: greyish borders + copy (headline, CTA, skills) */
+[data-theme="light"] .hero__headline {
+  border-color: var(--ink-grey);
+}
+
+[data-theme="light"] .hero__tag {
+  background: var(--ink-grey);
+  color: #fff;
+}
+
+[data-theme="light"] .cta__box {
+  border-color: var(--ink-grey);
+}
+
+[data-theme="light"] .cta__box .boxbox {
+  background: var(--ink-grey);
+}
+
+[data-theme="light"] .cta__skills {
+  color: var(--ink-grey);
+}
+
+/* Mouse SVG uses fixed blue/purple fills — shift to grey in light mode */
+[data-theme="light"] .hero__scroll img {
+  filter: grayscale(1) brightness(0.65) contrast(1.05);
+}
+
+.about__inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+  position: relative;
+  z-index: 1;
+}
+
+.about__title {
+  font-size: clamp(2.5rem, 5vw, 100px);
+  font-weight: 600;
+  margin: 0 0 1.5rem;
+}
+
+.about__text {
+  font-size: 16px;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+.about__text p {
+  margin: 0 0 1rem;
+}
+
+.about__text strong {
+  color: var(--text);
+}
+
+.about__card {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.about__card-img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 440 / 213;
+  object-fit: cover;
+}
+
+.about__card-link {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0;
+  background: none;
+  border-radius: 0;
+  line-height: 0;
+}
+
+/* External SVG <img> — force white icon, no fill box */
+.about__card-link img {
+  display: block;
+  filter: brightness(0) invert(1);
+}
+
+.about__card-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.about__contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.about__contact-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.about__contact-item img {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.cta {
+  position: relative;
+}
+
+.cta__box {
+  border: 3px solid var(--accent);
+  padding: 2rem;
+  min-height: 440px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative; 
+  max-width: 528px;
+}
+.cta__box .boxbox{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 60px;
+  background:#0E93F5;
+}
+.cta__title {
+  font-size: clamp(2rem, 4vw, 76px);
+  font-weight: 600;
+  line-height: 1.1;
+  margin: 0 0 2rem;
+}
+
+.cta__cursor {
+  position: absolute;
+  bottom: 7rem;
+  left: 23rem;
+  width: 60px;
+  height: 60px;
+  pointer-events: none;
+  animation: cta-cursor-float 2.8s ease-in-out infinite;
+}
+
+/* Figma node 1:162 — four columns, space-between, 16px / 40px line-height */
+.cta__skills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0 1.25rem;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 40px;
+  color: var(--accent);
+}
+
+.cta__skills > li {
+  margin: 0;
+  padding: 0;
+  flex: 0 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.cta__skills-line {
+  display: block;
+  white-space: nowrap;
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+  /* Drop decorative image/gradient backgrounds on tablet & phone */
+  .hero__backgrounds {
+    display: none;
+  }
+
+  .portfolio {
+    background-image: none;
+  }
+
+  .process__backdrop {
+    display: none;
+  }
+
+  .about::before {
+    display: none;
+  }
+
+  .hero__layout {
+    flex-direction: column;
+    padding-top: 5rem;
+  }
+
+  .hero__scroll {
+    position: static;
+    transform: none;
+    margin: 2rem auto 0;
+  }
+
+  .about__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .cta__box {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 600px) {
+  .portfolio__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .process__intro {
+    font-size: 18px;
+  }
+
+  .cta__skills {
+    justify-content: flex-start;
+    column-gap: 1.5rem;
+    row-gap: 1.25rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .cta__skills > li {
+    flex: 1 1 calc(50% - 0.75rem);
+  }
+
+  .cta__skills-line {
+    white-space: normal;
+  }
+}
