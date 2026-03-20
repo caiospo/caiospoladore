@@ -37,6 +37,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -427,11 +428,8 @@ a {
 /* Full-bleed backdrop (edge to edge), content stays in .process__inner */
 .process__backdrop {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100vw;
+  inset: 0;
+  width: 100%;
   z-index: 0;
   pointer-events: none;
   background: linear-gradient(180deg, transparent 0%, var(--bg-soft) 30%, var(--bg-soft) 70%, transparent 100%);
